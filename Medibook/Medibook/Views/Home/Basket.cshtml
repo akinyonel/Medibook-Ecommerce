@@ -1,0 +1,110 @@
+﻿@using Medibook.App_Classes
+@using Medibook.Helpers
+@model Basket
+@{
+    ViewBag.Title = "Basket";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- Page Content -->
+<div class="container shopBook" style="padding:80px 0 150px 0">
+    <div class="card shopping-cart">
+        <div class="card-header bg-dark text-light">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            Sepetim
+            <a href="@Url.Action("Index","Home")" class="btn btn-outline-light btn-sm pull-right" style="float:right">Alışverişe Devam Et</a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="card-body ">
+            @if (Model != null)
+            {
+                foreach (var item in Model.Items)
+                {
+                    <!-- PRODUCT -->
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-2 text-center">
+                            <img class="img-responsive" src="@item.Book.ImageString" alt="prewiew" width="120" height="80">
+                        </div>
+                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                            <h4 class="product-name"><strong>@item.Book.Name</strong></h4>
+                            <h4>
+                                <small>
+                                    @item.Book.Author
+                                </small>
+                            </h4>
+                        </div>
+                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                            <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                <h6><strong>@item.Book.Price ₺ <span class="text-muted">x</span></strong></h6>
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-4">
+
+                                <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                    <h6><strong>@item.Quantity <span class="text-muted"></span></strong></h6>
+                                </div>
+                                @*<div class="quantity">
+
+                                               <input type="button" value="+" class="plus">
+                            <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty"
+                                   size="4">
+                            <input type="button" value="-" class="minus">
+                                            </div>*@
+                            </div>
+                            <div class="col-2 col-sm-2 col-md-2 text-right">
+                                <button type="button" class="btn btn-outline-danger btn-xs deleteBook" name="@item.Book.Id">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- END PRODUCT -->}
+            }
+            else
+            {
+                <center><h4 class="shopBook"><i class="fa fa-info-circle"></i> Sepetinizde Ürün Bulunmamaktadır</h4></center>
+            }
+
+           
+
+        </div>
+        <div class="card-footer shopBook">
+
+            <div class="pull-right" style="margin: 10px; float:right">
+                @if (Model != null)
+                {
+                    <a href="" class="btn btn-success pull-right orderVerify" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-check"></i> Satın Al</a>
+
+                    <div class="pull-right" style="margin: 5px">
+
+                        Toplam Fiyat: <b>@Model.GrandTotal ₺</b>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- /.container -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Medibook Onay</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <center><h3 style="color:forestgreen"><i class="fa fa-check-circle"> Siparişinizi Aldık !</i></h3></center>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Kapat</button>
+           
+            </div>
+        </div>
+    </div>
+</div>
+

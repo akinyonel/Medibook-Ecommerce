@@ -1,0 +1,20 @@
+﻿@using Medibook.App_Classes
+@using Medibook.Helpers
+@model Basket
+
+@if (Model != null)
+{
+<li class="nav-item active basketCount">
+            <a class="nav-link " href="@Url.Action("Basket", "Home")"><i class="fa fa-shopping-basket"></i> Sepetim <span class="badge badge-primary">@Model.Items.Sum(x=>x.Quantity)</span></a>
+        </li>
+    
+}
+else
+{
+    <li class="nav-item active basketCount">
+        <a class="nav-link basketCount" href="@Url.Action("Basket", "Home")"><i class="fa fa-shopping-basket"></i> Sepetim <span class="badge badge-primary">0</span></a>
+    </li>
+}
+
+
+

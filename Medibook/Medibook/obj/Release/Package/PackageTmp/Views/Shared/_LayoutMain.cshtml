@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/png" href="~/Content/img/medibook16x16.png" />
+    <title>Medibook</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/shop-homepage.css" rel="stylesheet">
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <link href="~/Content/css/book-detail.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")"><img class="img-fluid" src="~/Content/img/open-book.png" /> Medibook</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href=@Url.Action("Index", "Home")>
+                            <i class="fa fa-home"></i> Anasayfa
+
+                        </a>
+                    </li>
+
+                    @{ Html.RenderAction("BasketWidget", "Home");}
+
+                    @{ Html.RenderPartial("_LoginPartial"); }
+
+                </ul>
+            </div>
+
+
+
+
+
+        </div>
+    </nav>
+    @RenderBody()
+
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; <a href="http://www.akinyonel.com/">akinyonel.com</a> 2019</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+
+    <script type="text/javascript">
+        $(document).ready(function myfunction() {
+            $(".addToBasket").click(function myfunction() {
+                var id = $(this).attr("name");
+                $.ajax({
+                    type: "GET",
+                    url: "/Home/AddToBasket",
+                    data: { id: id },
+                    success: function myfunction() {
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/Home/BasketWidget",
+                            success: function getData(data) {
+                                $(".basketCount").html("");
+                                $(".basketCount").html(data);
+
+                            }
+                        })
+
+                    },
+                    error: function myfunction() {
+                        alert("Ürün Sepete Eklenemedi")
+                    }
+                })
+            })
+        })
+    </script>
+
+    <script>
+        $(document).ready(function myfunction() {
+            $(".deleteBook").click(function deleteBook() {
+                var uId = $(this).attr("name");
+                $.ajax({
+                    type: "GET",
+                    url: "/Home/ReduceBasketItem",
+                    data: { id: uId },
+                    success: function myfunction() {
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/Home/BasketWidget",
+                            success: function myfunction(data) {
+
+                                $(".basketCount").html("");
+                                $(".basketCount").html(data);
+
+
+                            }
+                        });
+                        $.ajax({
+                            type: "GET",
+                            url: "/Home/Basket",
+                            success: function myfunction2(data2) {
+
+
+                                $(".shopBook").html("");
+                                $(".shopBook").html(data2);
+
+                            }
+                        });
+
+                    },
+                    error: function myfunction() {
+
+                    }
+
+                })
+            })
+
+        })
+    </script>
+
+    <script>
+        $(document).ready(function myfunction() {
+            $(".orderVerify").click(function deleteBook() {
+                var uId = $(this).attr("name");
+                $.ajax({
+                    type: "GET",
+                    url: "/Home/OrderVerify",
+                    data: { id: uId },
+                    success: function myfunction() {
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/Home/BasketWidget",
+                            success: function myfunction(data) {
+
+                                $(".basketCount").html("");
+                                $(".basketCount").html(data);
+
+
+                            }
+                        });
+                        $.ajax({
+                            type: "GET",
+                            url: "/Home/Basket",
+                            success: function myfunction2(data2) {
+
+
+                                $(".shopBook").html("");
+                                $(".shopBook").html(data2);
+
+                            }
+                        });
+
+                    },
+                    error: function myfunction() {
+
+                    }
+
+                })
+            })
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Medibook.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div class="row" style="padding:50px">
+
+
+
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-8"> <h2>Kategori Listesi</h2></div>
+            <div class="col-md-4">
+                <a href="@Url.Action("Create","Categories")" class="btn btn-primary btn-sm rounded-s" style="float:right"><i class="fa fa-plus"></i> Yeni Ekle </a>
+            </div>
+        </div>
+
+
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">  @Html.DisplayNameFor(model => model.Name)</th>
+                    <th scope="col"> İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>   @Html.DisplayFor(modelItem => item.Name)</td>
+                      
+                        <td>
+
+                            <a style="padding:10px" href="@Url.Action("Delete","Categories",new { id = item.Id, name = item.Name})" onclick="return confirm('İçerik Silinecektir, Onaylıyor musunuz ?');">
+                                <i class="fa fa-trash "></i>
+                            </a>
+
+                            <a style="padding:10px" href="@Url.Action("Edit","Categories",new { id = item.Id, name = item.Name})">
+                                <i class="fa fa-pencil-alt"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+
+    </div>
+    <div class="col-md-1"></div>
+</div>

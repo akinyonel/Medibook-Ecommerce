@@ -1,0 +1,115 @@
+﻿@using Medibook.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> Medibook Giriş </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="~/Content/img/medibook16x16.png" />
+    <!-- Place favicon.ico in the root directory -->
+    <link href="~/Content/css/vendor.css" rel="stylesheet" />
+    <link href="~/Content/css/app.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+    <!-- Theme initialization -->
+    <script>
+        var themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
+            {};
+        var themeName = themeSettings.themeName || '';
+        if (themeName) {
+            document.write('<link rel="stylesheet" id="theme-style" href="css/app-' + themeName + '.css">');
+        }
+        else {
+            document.write('<link rel="stylesheet" id="theme-style" href="css/app.css">');
+        }
+    </script>
+</head>
+
+<body>
+    <div class="auth">
+        <div class="auth-container">
+            <div class="card">
+                <header class="auth-header" style="background-color: #da291c">
+                    <center>
+                        <img src="~/Content/img/medibook.png" alt="Medibook" style="width:150px;">
+                    </center>
+                </header>
+                <div class="auth-content" style="background-color:lightgray">
+
+                    <p class="text-center"><i class="fa fa-key"></i> Medibook Üye Girişi</p>
+
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <form id="login-form" action="https://modularcode.io/index.html" method="GET" novalidate="">
+                            <div class="form-group">
+                                <label>E-mail</label>
+
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control underlined" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Şifre</label>
+
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control underlined" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="remember">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    <label>Beni Hatırla?</label>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-block btn-primary">Giriş</button>
+                            </div>
+                            <div class="form-group">
+                                <center>
+                                    <a href="@Url.Action("Register","Account")"> Kayıt Ol</a>
+                                </center>
+                            </div>
+                            <div class="form-group">
+                                <center>
+
+                                    <a href="@Url.Action("Index","Home")"> Anasayfaya Dön</a>
+                                </center>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Reference block for JS -->
+    <div class="ref" id="ref">
+        <div class="color-primary"></div>
+        <div class="chart">
+            <div class="color-primary"></div>
+            <div class="color-secondary"></div>
+        </div>
+    </div>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '../../www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-80463319-4', 'auto');
+        ga('send', 'pageview');</script>
+    <script src="~/Content/js/vendor.js"></script>
+    <script src="~/Content/js/app.js"></script>
+</body>

@@ -1,0 +1,63 @@
+﻿@model Medibook.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+
+
+<!-- Page Content -->
+<div class="container" style="padding:50px">
+
+    <!-- Portfolio Item Heading -->
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="my-4">
+                Kitap Detayı
+                <small> - @Html.DisplayFor(model => model.Name)</small>
+            </h1>
+        </div>
+        <div class="col-md-6">
+            <div style="float:right">
+                <a href="@Url.Action("Index","Books")" class="btn btn-primary btn-sm rounded-s"><i class="fa fa-arrow-circle-left"></i> Listeye Git </a>
+                <a href="@Url.Action("Edit","Books",new { id = Model.Id, name = Model.Name})" class="btn btn-primary btn-sm rounded-s"><i class="fa fa-pencil-alt"></i> Düzenle </a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+        <div class="col-md-8">
+            <img class="img-fluid" src=" @Html.DisplayFor(model => model.ImageString)" alt="">
+        </div>
+
+        <div class="col-md-4">
+
+            <h3 class="my-3">Detaylar</h3>
+            <ul>
+
+                <li><strong>  @Html.DisplayNameFor(model => model.Name) :</strong> @Html.DisplayFor(model => model.Name)</li>
+                <li><strong>  @Html.DisplayNameFor(model => model.Author) :</strong> @Html.DisplayFor(model => model.Author)</li>
+                <li><strong>  @Html.DisplayNameFor(model => model.Publisher) :</strong> @Html.DisplayFor(model => model.Publisher)</li>
+
+                <li><strong>  @Html.DisplayNameFor(model => model.Language) :</strong> @Html.DisplayFor(model => model.Language)</li>
+                <li> <strong>  @Html.DisplayNameFor(model => model.Price) :</strong> @Html.DisplayFor(model => model.Price) ₺</li>
+                <li> <strong>  @Html.DisplayNameFor(model => model.ImageString) :</strong> @Html.DisplayFor(model => model.ImageString)</li>
+                <li><strong>  @Html.DisplayNameFor(model => model.Category.Name) :</strong> @Html.DisplayFor(model => model.Category.Name)</li>
+
+
+            </ul>
+            <h3 class="my-3">Açıklama</h3>
+            <p>       @Html.Raw(Model.Description)</p>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+
+</div>
+<!-- /.container -->

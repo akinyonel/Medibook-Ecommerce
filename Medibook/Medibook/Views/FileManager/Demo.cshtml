@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Demo";
+}
+
+<h2>Demo</h2>
+
+<input type="text" id="Resim"  class="form-control well-large" style="width:100% !important" />
+<br />
+<a class="btn btn-primary" id="btnDemoTextBox"  name="Resim" >Resim Yükle Url=true </a>
+<br /><br />
+<a class="btn btn-primary" id="btnDemoTextBox2"   name="Resim">Resim Yükle Url=false</a>
+
+    @section scripts{
+    <script type="text/javascript">
+            //url=true
+            $("#btnDemoTextBox").click(function () {
+              
+                window.open('/FileManager/Index/?profile=notinymce&Url=true&BackId='+this.name, 'demo', 'toolbar=0,location=0,status=0,menubar=0,scrollbars=yes,resizable=1,width=900,height=600');
+                return false;
+            });
+
+            //urlfalse
+            $("#btnDemoTextBox2").click(function () {
+
+                window.open('/FileManager/Index/?profile=notinymce&Url=false&BackId=' + this.name, 'demo', 'toolbar=0,location=0,status=0,menubar=0,scrollbars=yes,resizable=1,width=900,height=600');
+                return false;
+            });
+        </script>
+    }
